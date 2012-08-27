@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="buttonPlaySound">playSound</string>
+    <string name="con1">Control 1</string>
+    <string name="btn">btn</string>
+</resources>
