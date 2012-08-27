@@ -1,0 +1,2 @@
+@ECHO OFF
+"C:\Program Files\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "C:\Users\Joh\Desktop\Google Drive\Projekte\servo\labels.tmp" -fI -W+ie -C V2E -o "C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.hex" -d "C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.obj" -e "C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.eep" -m "C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.map" "C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm"

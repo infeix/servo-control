@@ -1,0 +1,32 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATmega8</DEVICE>
+ <WORKING_DIR>C:\Users\Joh\Desktop\Google Drive\Projekte\servo</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes\m8def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.map</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <start><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>18</LINE></start>
+  <longidle><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>33</LINE></longidle>
+  <overflow><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>52</LINE></overflow>
+  <blongidle><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>54</LINE></blongidle>
+  <over><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>57</LINE></over>
+  <toggle><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>59</LINE></toggle>
+  <ausschalt><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>73</LINE></ausschalt>
+  <anschalt><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>65</LINE></anschalt>
+  <weiter><FILE>C:\Users\Joh\Desktop\Google Drive\Projekte\servo\servo.asm</FILE><LINE>81</LINE></weiter>
+ </LABELS>
+</ASSEMBLER_INFO>
