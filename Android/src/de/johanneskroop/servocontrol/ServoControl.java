@@ -17,13 +17,14 @@ import android.widget.ToggleButton;
 public class ServoControl extends Activity implements OnCheckedChangeListener{
     // originally from http://marblemice.blogspot.com/2010/04/generate-and-play-tone-in-android.html
     // and modified by Steve Pomeroy <steve@staticfree.info>
-    private final double duration = 0.0025; // seconds
-    private final int sampleRate = 44000;
-    private final int numSamples = (int)(duration * (double)sampleRate);
+	private final int duration = 3; // seconds
+    private final int sampleRate = 20000;
+    private final int numSamples = duration * sampleRate;
     private final double sample[] = new double[numSamples];
-    private final double freqOfTone = 440; // hz
+    private final double sample2[] = new double[numSamples];
+    private final double freqOfTone = 20000; // hz
 
-    private final byte generatedSnd[] = new byte[2 * numSamples];
+    private final byte generatedSnd[] = new byte[4 * numSamples];
 
     Handler handler = new Handler();
 
@@ -67,42 +68,82 @@ public class ServoControl extends Activity implements OnCheckedChangeListener{
   
     
     void genTone(){
-    	int ms = sampleRate/1000;
-    	int x = 2;
-    	int num = numSamples/2;
-        // fill out the array
-    	for (int j = 0; j < numSamples;) {
-    		for (int i = 0; i < x && j < numSamples; ++i) {
-    			sample[j++] = 1;//Math.sin(2 * Math.PI * i / (sampleRate/freqOfTone));
-    		}
-    		for (int i = 0; i < x && j < numSamples; ++i) {
-    			sample[j++] = 0;//Math.sin(2 * Math.PI * i / (sampleRate/freqOfTone));
-    		}
-    		for (int i = 0; i < x && j < numSamples; ++i) {
-    			sample[j++] = 1;//Math.sin(2 * Math.PI * i / (sampleRate/freqOfTone));
-    		}
-    		for (int i = 0; i < x && j < numSamples; ++i) {
-    			sample[j++] = 0;//Math.sin(2 * Math.PI * i / (sampleRate/freqOfTone));
-    		}
+    	String s = Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50)+Integer.toBinaryString(50);
+    	s = s + s + s + s + s + s;
+    	s = s + s + s + s + s + s;
+    	System.out.println("submit: "+s);
+    	char[] ar =  s.toCharArray();
+    	int ari = 0;
+    	// fill out the array
+    	sample[0] = 0;
+    	sample2[0] = 0;
+    	sample[1] = 1;
+    	if(ari < ar.length && ar[ari++] == '1')
+    	{
+    		sample2[1] = 1;
+    		sample2[2] = -1;
     	}
+    	else
+    	{
+    		sample2[1] = 0;
+    		sample2[2] = 0;
+    	}
+    	sample[2] = 1;
+        for (int i = 3; i < numSamples; i++) 
+        {
+            sample[i] = sample[i-1] * -1;
+            if(ari < ar.length && ar[ari++] == '1')
+        	{
+        		sample2[i] = 1;
+        		if(i+1 < numSamples)
+        		{
+        			sample2[i+1] = -1;
+        		}
+        	}
+        	else
+        	{
+        		sample2[i] = 0;
+        		if(i+1 < numSamples)
+        		{
+        			sample2[i+1] = 0;
+        		}
+        	}
+            if( i < 30)
+            {
+            	System.out.println("("+ sample[i] + ") - ("+ sample2[i]+")");
+            }
+            i++;
+            if( i < numSamples)
+            {
+            	sample[i] = sample[i-1];
+            	if( i < 30)
+                {
+            		System.out.println("("+ sample[i] + ") - ("+ sample2[i]+")");
+                }
+            }
+            
+        }
 
         // convert to 16 bit pcm sound array
         // assumes the sample buffer is normalised.
         int idx = 0;
+        int oidx = 0;
         for (final double dVal : sample) {
             // scale to maximum amplitude
             final short val = (short) ((dVal * 32767));
+            final short val2 = (short) ((sample2[oidx++] * 32767));
             // in 16 bit wav PCM, first byte is the low order byte
             generatedSnd[idx++] = (byte) (val & 0x00ff);
             generatedSnd[idx++] = (byte) ((val & 0xff00) >>> 8);
-
+            generatedSnd[idx++] = (byte) (val2 & 0x00ff);
+            generatedSnd[idx++] = (byte) ((val2 & 0xff00) >>> 8);
         }
     }
 
     void playSound()
     {
         final AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
-                sampleRate, AudioFormat.CHANNEL_CONFIGURATION_MONO,
+                sampleRate, AudioFormat.CHANNEL_CONFIGURATION_STEREO,
                 AudioFormat.ENCODING_PCM_16BIT, numSamples,
                 AudioTrack.MODE_STATIC);
         audioTrack.write(generatedSnd, 0, generatedSnd.length);
