@@ -1,3 +1,3 @@
 phone-servo-control
 ===================
-<img src="aufbau.png">
+<img src="https://raw.github.com/infeix/phone-servo-control/master/aufbau.png">
